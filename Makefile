@@ -10,6 +10,9 @@ SRC_DIRS = $(wildcard src/*/)
 # This creates a list of all modules across all subdirectories
 MODULES = $(foreach dir,$(SRC_DIRS),$(basename $(notdir $(wildcard $(dir)*.v))))
 
+# 全ソース (依存を自動で含める) — TB が参照しうるすべてを渡す
+ALL_SRCS = $(shell find src -name '*.v')
+
 # Helper function: find source file for a given module
 # Search through all src subdirectories
 find_src = $(wildcard src/*/$1.v)
@@ -20,7 +23,7 @@ all: $(addprefix build/tb_,$(addsuffix .vvp,$(MODULES)))
 # Pattern rule: Compile testbench for any module
 build/tb_%.vvp: sim/tb_%.v
 	@mkdir -p build
-	$(SIMULATOR) -o $@ $^ $(call find_src,$*)
+	$(SIMULATOR) -o $@ $^ $(ALL_SRCS)
 
 # Run all simulations
 sim: $(addprefix build/tb_,$(addsuffix .vvp,$(MODULES)))
