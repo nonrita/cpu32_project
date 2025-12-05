@@ -1,0 +1,30 @@
+# Build artifacts
+build/
+*.vvp
+*.o
+
+# Simulation outputs
+*.vcd
+*.fst
+*.ghw
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+*.log
