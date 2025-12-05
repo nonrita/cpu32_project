@@ -2,6 +2,7 @@
 
 SIMULATOR = iverilog
 VVPFLAGS = -v
+INCLUDES = -I src/alu
 
 # Automatically detect all source folders under src/
 SRC_DIRS = $(wildcard src/*/)
@@ -23,7 +24,7 @@ all: $(addprefix build/tb_,$(addsuffix .vvp,$(MODULES)))
 # Pattern rule: Compile testbench for any module
 build/tb_%.vvp: sim/tb_%.v
 	@mkdir -p build
-	$(SIMULATOR) -o $@ $^ $(ALL_SRCS)
+	$(SIMULATOR) $(INCLUDES) -o $@ $^ $(ALL_SRCS)
 
 # Run all simulations
 sim: $(addprefix build/tb_,$(addsuffix .vvp,$(MODULES)))
